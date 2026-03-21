@@ -63,8 +63,9 @@ export default defineEventHandler(async (event) => {
 
     const pathname = `sources/${id}/${filename}`
     const contentType = field.type || 'text/plain'
+    const content = field.data.toString('utf-8')
 
-    await blob.put(pathname, new Blob([field.data], { type: contentType }), { contentType })
+    await blob.put(pathname, content, { contentType, addRandomSuffix: false })
     results.push({ filename, pathname, size: field.data.length })
   }
 
